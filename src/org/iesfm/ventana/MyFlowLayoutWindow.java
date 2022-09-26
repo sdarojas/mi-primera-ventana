@@ -10,7 +10,7 @@ public class MyFlowLayoutWindow {
         JFrame f = new JFrame();
         f.setTitle("Titled border window");
         f.setVisible(true);
-        f.setBounds(20,20,500,300);
+        f.setBounds(20,20,550,300);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainpanel = new JPanel();
@@ -25,6 +25,7 @@ public class MyFlowLayoutWindow {
 
         JRadioButton rbLeft = new JRadioButton("Left to right");
         rbLeft.setActionCommand("LEFT");
+        rbLeft.setSelected(true);
         JRadioButton rbRight = new JRadioButton("Right to left");
         rbRight.setActionCommand("RIGHT");
 
@@ -44,23 +45,18 @@ public class MyFlowLayoutWindow {
         mainpanel.add(buttonApply);
 
 
-        buttonApply.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = group.getSelection().getActionCommand();
-                FlowLayout layoutManager = (FlowLayout) mainpanel.getLayout();
-                if (selected.equals("RIGHT")) {
-                    layoutManager.setAlignment(FlowLayout.RIGHT);
-                    mainpanel.repaint();
-                    mainpanel.revalidate();
-                }
-                else if (selected.equals("LEFT")){
-                    layoutManager.setAlignment(FlowLayout.LEFT);
-                    mainpanel.repaint();
-                    mainpanel.revalidate();
-                }
-
+        buttonApply.addActionListener(e -> {
+            String selected = group.getSelection().getActionCommand();
+            FlowLayout layoutManager = (FlowLayout) mainpanel.getLayout();
+            if (selected.equals("RIGHT")) {
+                layoutManager.setAlignment(FlowLayout.RIGHT);
             }
+            else if (selected.equals("LEFT")){
+                layoutManager.setAlignment(FlowLayout.LEFT);
+            }
+            mainpanel.repaint();
+            mainpanel.revalidate();
+
         });
 
         f.repaint();
