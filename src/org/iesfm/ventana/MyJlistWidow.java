@@ -1,9 +1,13 @@
 package org.iesfm.ventana;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MyJlistWidow {
     public static void main(String[] args) {
@@ -29,7 +33,7 @@ public class MyJlistWidow {
         borderPanel.add(borderLabel);
         mainPanel.add(borderPanel,BorderLayout.NORTH);
 
-        JLabel checkLabel = new JLabel("Se agregóun nuevo elemento");
+        JLabel checkLabel = new JLabel();
         mainPanel.add(checkLabel,BorderLayout.SOUTH);
 
         JPanel centerPanel = new JPanel(new BorderLayout());
@@ -83,6 +87,27 @@ public class MyJlistWidow {
             int selected = list.getSelectedIndex();
             model.removeElementAt(selected);
 
+        });
+
+        borderLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                borderLabel.setBackground(Color.RED);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                borderLabel.setBackground(Color.LIGHT_GRAY);
+            }
+        });
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String name = list.getSelectedValue();
+                checkLabel.setText("Se ha seleccionado: "+name);
+            }
         });
 
 
